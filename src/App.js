@@ -1,25 +1,34 @@
-import logo from './logo.svg';
 import './App.css';
+import {Button} from 'antd'
+import axios from 'axios'
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    function click() {
+        console.log("click")
+        axios.post("/api/login", {
+                username: "admin",
+                password: "admin"
+            }
+        ).then(function (response) {
+
+            if(response.status===200)
+            {
+                console.log("登录成功")
+            }
+
+            console.log(response.status);
+            console.log(response.data);
+        })
+    }
+
+    return (
+        <div className="App">
+            <Button type="primary"
+                    onClick={click()}
+            >Primary Button</Button>
+        </div>
+    );
 }
 
 export default App;
